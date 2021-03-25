@@ -84,6 +84,8 @@ def get_identity(context, prefix=None, identity_func=None, user=None):
             if user is None:
                 user = get_user_from_context(context)
             if get_user_is_authenticated(user):
+                identity_func = getattr(settings, 'ANALYTICAL_IDENTIFY_FUNC',
+                                        identity_func)
                 if identity_func is not None:
                     return identity_func(user)
                 else:
